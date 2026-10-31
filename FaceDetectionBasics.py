@@ -18,10 +18,15 @@ while True:
 
     if results.detections:
         for id,detection in enumerate(results.detections):
-            mpDrawing.draw_detection(img,detection)
+
+            # mpDrawing.draw_detection(img,detection)  #This puts 6 dots on the face with a box too
             # print(id,detection)
             # print(detection.score)
             # print(detection.location_data.relative_bounding_box)
+            bboxC=detection.location_data.relative_bounding_box  #line 26-29 puts a box only no dots
+            ih,iw,ic=img.shape
+            bbox=int(bboxC.xmin*iw),int(bboxC.ymin*ih),int(bboxC.width*iw),int(bboxC.height*ih)
+            cv2.rectangle(img,bbox,(255,0,255),2)
 
 
 
